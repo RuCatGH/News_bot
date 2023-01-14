@@ -21,7 +21,7 @@ dp = Dispatcher(bot)
 top_headlines = newsapi.get_top_headlines(country='ru', language='ru')
 articles = top_headlines['articles']
 
-def message_preparation(current_article): # Текста сообщения и создание кнопок
+def message_preparation(current_article): # Текст сообщения и создание кнопок
     news_message = f"<b>{articles[current_article]['title']}</b>\n{articles[current_article]['description']}\n{articles[current_article]['url']}\nСтраница {current_article}\n"
     keyboard = InlineKeyboardMarkup()
     if current_article > 0:

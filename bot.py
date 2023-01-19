@@ -4,8 +4,6 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from newsapi import NewsApiClient
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from aiogram.dispatcher import FSMContext
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,7 +19,7 @@ dp = Dispatcher(bot)
 top_headlines = newsapi.get_top_headlines(country='ru', language='ru')
 articles = top_headlines['articles']
 
-def message_preparation(current_article): # Текст сообщения и создание кнопок
+def message_preparation(current_article: int) -> tuple[str, InlineKeyboardMarkup]: # Текста сообщения и создание кнопок
     news_message = f"<b>{articles[current_article]['title']}</b>\n{articles[current_article]['description']}\n{articles[current_article]['url']}\nСтраница {current_article}\n"
     keyboard = InlineKeyboardMarkup()
     if current_article > 0:
